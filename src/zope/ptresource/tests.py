@@ -33,15 +33,22 @@ checker = NamesChecker(('__call__', 'request', 'publishTraverse'))
 
 class Test(cleanup.CleanUp, unittest.TestCase):
 
+    _test_file = None
+
     def setUp(self):
         super(Test, self).setUp()
         provideAdapter(DefaultTraversable, (None,), ITraversable)
 
+    def tearDown(self):
+        super(Test, self).tearDown()
+        if self._test_file is not None:
+            self._test_file.close()
+
     def createTestFile(self, contents):
-        fd, path = tempfile.mkstemp()
-        os.close(fd)
-        open(path, 'w').write(contents)
-        return path
+        f = self._test_file = tempfile.NamedTemporaryFile(mode='w+')
+        f.write(contents)
+        f.flush()
+        return f.name
 
     def testNoTraversal(self):
         path = self.createTestFile('<html><body><p>test</p></body></html>')
@@ -50,7 +57,6 @@ class Test(cleanup.CleanUp, unittest.TestCase):
         resource = factory(request)
         self.assertRaises(NotFound, resource.publishTraverse,
                           resource.request, ())
-        os.unlink(path)
 
     def testBrowserDefault(self):
         path = self.createTestFile(
@@ -60,21 +66,19 @@ class Test(cleanup.CleanUp, unittest.TestCase):
         factory = PageTemplateResourceFactory(path, checker, 'testresource.pt')
         resource = factory(request)
         view, next = resource.browserDefault(request)
-        self.assertEquals(view(),
+        self.assertEqual(view(),
                           '<html><body>%s</body></html>' % test_data)
-        self.assertEquals('text/html',
+        self.assertEqual('text/html',
                           request.response.getHeader('Content-Type'))
-        self.assertEquals(next, ())
+        self.assertEqual(next, ())
 
         request = TestRequest(test_data=test_data, REQUEST_METHOD='HEAD')
         resource = factory(request)
         view, next = resource.browserDefault(request)
-        self.assertEquals(view(), '')
-        self.assertEquals('text/html',
+        self.assertEqual(view(), '')
+        self.assertEqual('text/html',
                           request.response.getHeader('Content-Type'))
-        self.assertEquals(next, ())
-        
-        os.unlink(path)
+        self.assertEqual(next, ())
 
 
 def test_suite():

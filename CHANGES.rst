@@ -1,22 +1,24 @@
-=======
-CHANGES
+
+Changes
 =======
 
 4.0.0 (unreleased)
 ==================
 
-- Enable testing on Travis.
+- Add support for Python 3.4.
+
+- Add support for testing on Travis.
 
 
 4.0.0a1 (2013-02-25)
 ====================
 
-- Added support for Python 3.3.
+- Add support for Python 3.3.
 
-- Replaced deprecated ``zope.interface.implements`` usage with equivalent
+- Replace deprecated ``zope.interface.implements`` usage with equivalent
   ``zope.interface.implementer`` decorator.
 
-- Dropped support for Python 2.4 and 2.5.
+- Drop support for Python 2.4 and 2.5.
 
 
 3.9.0 (2009-08-27)

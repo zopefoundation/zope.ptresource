@@ -42,12 +42,13 @@ class Test(cleanup.CleanUp, unittest.TestCase):
     def tearDown(self):
         super(Test, self).tearDown()
         if self._test_file is not None:
-            self._test_file.close()
+            os.unlink(self._test_file)
 
     def createTestFile(self, contents):
-        f = self._test_file = tempfile.NamedTemporaryFile(mode='w+')
+        f = tempfile.NamedTemporaryFile(mode='w', delete=False)
         f.write(contents)
-        f.flush()
+        f.close()
+        self._test_file = f.name
         return f.name
 
     def testNoTraversal(self):

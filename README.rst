@@ -1,5 +1,8 @@
-``zope.ptresource`` Overview
-============================
+``zope.ptresource``
+===================
+
+.. image:: https://travis-ci.org/zopefoundation/zope.ptresource.png?branch=master
+        :target: https://travis-ci.org/zopefoundation/zope.ptresource
 
 .. note::
    

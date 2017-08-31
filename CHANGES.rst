@@ -1,12 +1,15 @@
-Changes
-=======
+=========
+ Changes
+=========
+
 
 4.1.0 (unreleased)
 ==================
 
-- Add support for Python 3.5.
+- Add support for Python 3.5 and 3.6.
 
-- Drop support for Python 2.6.
+- Drop support for Python 2.6 and 3.3.
+
 
 
 4.0.0 (2014-12-24)
@@ -17,6 +20,7 @@ Changes
 - Add support for Python 3.4.
 
 - Add support for testing on Travis.
+
 
 
 4.0.0a1 (2013-02-25)
@@ -30,10 +34,11 @@ Changes
 - Drop support for Python 2.4 and 2.5.
 
 
+
 3.9.0 (2009-08-27)
 ==================
 
-Initial release. This package was splitted off zope.app.publisher as a part
+Initial release. This package was split off zope.app.publisher as a part
 of refactoring process. It's now a plugin for another package that was
 refactored from zope.app.publisher - zope.browserresource. See its
 documentation for more details.

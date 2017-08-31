@@ -26,29 +26,23 @@ from zope.traversing.adapters import DefaultTraversable
 from zope.traversing.interfaces import ITraversable
 
 from zope.ptresource.ptresource import PageTemplateResourceFactory
-
+from zope.ptresource.ptresource import PageTemplateResource
+from zope.ptresource.ptresource import PageTemplate
 
 checker = NamesChecker(('__call__', 'request', 'publishTraverse'))
 
 
 class Test(cleanup.CleanUp, unittest.TestCase):
 
-    _test_file = None
-
     def setUp(self):
         super(Test, self).setUp()
         provideAdapter(DefaultTraversable, (None,), ITraversable)
-
-    def tearDown(self):
-        super(Test, self).tearDown()
-        if self._test_file is not None:
-            os.unlink(self._test_file)
 
     def createTestFile(self, contents):
         f = tempfile.NamedTemporaryFile(mode='w', delete=False)
         f.write(contents)
         f.close()
-        self._test_file = f.name
+        self.addCleanup(os.unlink, f.name)
         return f.name
 
     def testNoTraversal(self):
@@ -68,9 +62,9 @@ class Test(cleanup.CleanUp, unittest.TestCase):
         resource = factory(request)
         view, next = resource.browserDefault(request)
         self.assertEqual(view(),
-                          '<html><body>%s</body></html>' % test_data)
+                         '<html><body>%s</body></html>' % test_data)
         self.assertEqual('text/html',
-                          request.response.getHeader('Content-Type'))
+                         request.response.getHeader('Content-Type'))
         self.assertEqual(next, ())
 
         request = TestRequest(test_data=test_data, REQUEST_METHOD='HEAD')
@@ -78,9 +72,24 @@ class Test(cleanup.CleanUp, unittest.TestCase):
         view, next = resource.browserDefault(request)
         self.assertEqual(view(), '')
         self.assertEqual('text/html',
-                          request.response.getHeader('Content-Type'))
+                         request.response.getHeader('Content-Type'))
         self.assertEqual(next, ())
+
+    def testContentType(self):
+        path = self.createTestFile('<html><body><p>test</p></body></html>')
+        request = TestRequest()
+        pt = PageTemplate(path, content_type='text/xhtml')
+
+        resource = PageTemplateResource(pt, request)
+        resource.GET()
+        self.assertEqual('text/xhtml',
+                         request.response.getHeader('Content-Type'))
+
+    def testConfigure(self):
+        from zope.configuration import xmlconfig
+        import zope.ptresource
+        xmlconfig.file('configure.zcml', zope.ptresource)
 
 
 def test_suite():
-    return unittest.makeSuite(Test)
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)

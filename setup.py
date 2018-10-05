@@ -29,7 +29,7 @@ TESTS_REQUIRE = [
 
 setup(
     name='zope.ptresource',
-    version='4.2.0',
+    version='4.2.1.dev0',
     url='https://github.com/zopefoundation/zope.ptresource/',
     author='Zope Foundation and Contributors',
     author_email='zope-dev@zope.org',

@@ -25,6 +25,7 @@ from zope.browserresource.resource import Resource
 from zope.browserresource.interfaces import IResourceFactory
 from zope.browserresource.interfaces import IResourceFactoryFactory
 
+
 class PageTemplate(TrustedAppPT, PageTemplateFile):
     """
     Resource that is a page template
@@ -46,8 +47,9 @@ class PageTemplate(TrustedAppPT, PageTemplateFile):
         namespace = self.pt_getContext(
             request=request,
             options=keywords
-            )
+        )
         return self.pt_render(namespace)
+
 
 @implementer(IBrowserPublisher)
 class PageTemplateResource(BrowserView, Resource):
@@ -73,6 +75,7 @@ class PageTemplateResource(BrowserView, Resource):
         if not response.getHeader("Content-Type"):
             response.setHeader("Content-Type", pt.content_type)
         return pt(self.request)
+
 
 @implementer(IResourceFactory)
 @provider(IResourceFactoryFactory)

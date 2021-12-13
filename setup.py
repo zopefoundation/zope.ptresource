@@ -16,9 +16,11 @@
 import os
 from setuptools import setup, find_packages
 
+
 def read(*rnames):
     with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
         return f.read()
+
 
 long_description = (read('README.rst') + '\n\n' + read('CHANGES.rst'))
 
@@ -29,8 +31,13 @@ TESTS_REQUIRE = [
 
 setup(
     name='zope.ptresource',
-    version='4.2.1.dev0',
+    version='4.3.0.dev0',
     url='https://github.com/zopefoundation/zope.ptresource/',
+    project_urls={
+        'Issue Tracker': ('https://github.com/zopefoundation/'
+                          'zope.ptresource/issues'),
+        'Sources': 'https://github.com/zopefoundation/zope.ptresource',
+    },
     author='Zope Foundation and Contributors',
     author_email='zope-dev@zope.org',
     classifiers=[
@@ -41,10 +48,12 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Operating System :: OS Independent',
@@ -57,6 +66,7 @@ setup(
     packages=find_packages('src'),
     package_dir={'': 'src'},
     namespace_packages=['zope'],
+    python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*',
     install_requires=[
         'setuptools',
         'zope.browserresource',

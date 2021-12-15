@@ -31,7 +31,7 @@ TESTS_REQUIRE = [
 
 setup(
     name='zope.ptresource',
-    version='4.3.0',
+    version='4.3.1.dev0',
     url='https://github.com/zopefoundation/zope.ptresource/',
     project_urls={
         'Issue Tracker': ('https://github.com/zopefoundation/'

@@ -1,6 +1,6 @@
-=====================
- ``zope.ptresource``
-=====================
+===============
+zope.ptresource
+===============
 
 .. image:: https://img.shields.io/pypi/v/zope.ptresource.svg
         :target: https://pypi.python.org/pypi/zope.ptresource/

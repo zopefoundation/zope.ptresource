@@ -14,16 +14,16 @@
 """Page Template Resource
 """
 
-from zope.interface import implementer, provider
+from zope.browserresource.interfaces import IResourceFactory
+from zope.browserresource.interfaces import IResourceFactoryFactory
+from zope.browserresource.resource import Resource
+from zope.interface import implementer
+from zope.interface import provider
 from zope.pagetemplate.engine import TrustedAppPT
 from zope.pagetemplate.pagetemplatefile import PageTemplateFile
 from zope.publisher.browser import BrowserView
 from zope.publisher.interfaces import NotFound
 from zope.publisher.interfaces.browser import IBrowserPublisher
-
-from zope.browserresource.resource import Resource
-from zope.browserresource.interfaces import IResourceFactory
-from zope.browserresource.interfaces import IResourceFactoryFactory
 
 
 class PageTemplate(TrustedAppPT, PageTemplateFile):

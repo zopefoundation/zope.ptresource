@@ -25,9 +25,10 @@ from zope.testing import cleanup
 from zope.traversing.adapters import DefaultTraversable
 from zope.traversing.interfaces import ITraversable
 
-from zope.ptresource.ptresource import PageTemplateResourceFactory
-from zope.ptresource.ptresource import PageTemplateResource
 from zope.ptresource.ptresource import PageTemplate
+from zope.ptresource.ptresource import PageTemplateResource
+from zope.ptresource.ptresource import PageTemplateResourceFactory
+
 
 checker = NamesChecker(('__call__', 'request', 'publishTraverse'))
 
@@ -35,7 +36,7 @@ checker = NamesChecker(('__call__', 'request', 'publishTraverse'))
 class Test(cleanup.CleanUp, unittest.TestCase):
 
     def setUp(self):
-        super(Test, self).setUp()
+        super().setUp()
         provideAdapter(DefaultTraversable, (None,), ITraversable)
 
     def createTestFile(self, contents):
@@ -87,6 +88,7 @@ class Test(cleanup.CleanUp, unittest.TestCase):
 
     def testConfigure(self):
         from zope.configuration import xmlconfig
+
         import zope.ptresource
         xmlconfig.file('configure.zcml', zope.ptresource)
 

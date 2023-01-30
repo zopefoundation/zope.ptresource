@@ -36,7 +36,7 @@ checker = NamesChecker(('__call__', 'request', 'publishTraverse'))
 class Test(cleanup.CleanUp, unittest.TestCase):
 
     def setUp(self):
-        super(Test, self).setUp()
+        super().setUp()
         provideAdapter(DefaultTraversable, (None,), ITraversable)
 
     def createTestFile(self, contents):

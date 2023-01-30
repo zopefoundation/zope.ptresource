@@ -33,12 +33,12 @@ class PageTemplate(TrustedAppPT, PageTemplateFile):
 
     def __init__(self, filename, _prefix=None, content_type=None):
         _prefix = self.get_path_from_prefix(_prefix)
-        super(PageTemplate, self).__init__(filename, _prefix)
+        super().__init__(filename, _prefix)
         if content_type is not None:
             self.content_type = content_type
 
     def pt_getContext(self, request, **kw):
-        namespace = super(PageTemplate, self).pt_getContext(**kw)
+        namespace = super().pt_getContext(**kw)
         namespace['context'] = None
         namespace['request'] = request
         return namespace
@@ -79,7 +79,7 @@ class PageTemplateResource(BrowserView, Resource):
 
 @implementer(IResourceFactory)
 @provider(IResourceFactoryFactory)
-class PageTemplateResourceFactory(object):
+class PageTemplateResourceFactory:
 
     def __init__(self, path, checker, name):
         self.__pt = PageTemplate(path)

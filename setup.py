@@ -41,7 +41,7 @@ setup(
         'Sources': 'https://github.com/zopefoundation/zope.ptresource',
     },
     author='Zope Foundation and Contributors',
-    author_email='zope-dev@zope.org',
+    author_email='zope-dev@zope.dev',
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
@@ -77,8 +77,6 @@ setup(
     extras_require={
         'test': TESTS_REQUIRE
     },
-    tests_require=TESTS_REQUIRE,
-    test_suite='zope.ptresource.tests.test_suite',
     include_package_data=True,
     zip_safe=False,
 )

@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "zope.ptresource"
-version = "6.1.dev0"
+version = "6.1"
 description = "Page template resource plugin for zope.browserresource"
 license = "ZPL-2.1"
 classifiers = [
